@@ -4,240 +4,503 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dávid Rabb</title>
-  <meta name="description" content="Dávid Rabb — Cognitive Neuroscience, AI Alignment, and Software Engineering." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta name="description" content="Dávid Rabb - cognitive neuroscience, AI alignment, philosophy, and software engineering." />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
-      --bg: #faf9f7;
-      --text: #1a1a1a;
-      --muted: #666;
-      --accent: #c0392b;
-      --border: #e0ddd8;
-      --max: 680px;
+      --bg: #f8f4ed;
+      --paper: #fffdf7;
+      --text: #11100d;
+      --muted: #746f66;
+      --faint: #ece4d8;
+      --line: #d8cec0;
+      --moss: #235f42;
+      --leaf: #8a9b45;
+      --ink: #263b8f;
+      --clay: #a65337;
+      --night: #11140f;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "Courier New", Courier, monospace;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      background: var(--bg);
+      min-height: 100vh;
+      background:
+        linear-gradient(90deg, rgba(35, 95, 66, 0.045), transparent 28%, transparent 74%, rgba(166, 83, 55, 0.05)),
+        var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      line-height: 1.7;
-      padding: 0 1.5rem;
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    main {
-      max-width: var(--max);
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      width: min(1280px, calc(100% - 48px));
       margin: 0 auto;
-      padding: 5rem 0 6rem;
+      padding: 26px 0 80px;
     }
 
-    /* ── Header ── */
-    .header {
-      display: flex;
-      align-items: flex-start;
-      gap: 2rem;
-      margin-bottom: 3rem;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      min-height: 62px;
+      margin-bottom: 70px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--line);
+      background: rgba(248, 244, 237, 0.88);
+      backdrop-filter: blur(12px);
     }
 
-    .avatar {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--border);
-      flex-shrink: 0;
-      background: #ddd;
+    .brand {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: #999;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: #2a2722;
+      letter-spacing: 0.01em;
     }
 
-    .header-text h1 {
-      font-family: 'Lora', serif;
-      font-size: 1.75rem;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.3rem;
+    .seed {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--text);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 62% 35%, var(--paper) 0 15%, transparent 16%),
+        linear-gradient(135deg, var(--moss), var(--ink));
+      box-shadow: inset 0 0 0 5px var(--paper);
     }
 
-    .header-text .tagline {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 300;
-      margin-bottom: 0.75rem;
+    .seed::after {
+      content: "";
+      position: absolute;
+      right: -6px;
+      top: 2px;
+      width: 11px;
+      height: 18px;
+      border: 1px solid var(--moss);
+      border-left: 0;
+      border-radius: 0 16px 16px 0;
+      transform: rotate(-24deg);
+      background: rgba(138, 155, 69, 0.14);
     }
 
-    .links {
+    .nav {
       display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 18px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
     }
 
-    .links a {
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 0.85rem;
+    .nav a {
+      position: relative;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+    }
+
+    .nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -5px;
+      height: 1px;
+      transform: scaleX(0);
+      transform-origin: left;
+      background: currentColor;
+      transition: transform 160ms ease;
+    }
+
+    .nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(320px, 0.7fr) minmax(520px, 1.35fr);
+      gap: clamp(34px, 4.8vw, 66px);
+      align-items: center;
+      margin-bottom: 82px;
+    }
+
+    h1 {
+      max-width: 620px;
+      font-family: var(--serif);
+      font-size: clamp(46px, 5.2vw, 76px);
       font-weight: 500;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.15s;
+      letter-spacing: -0.025em;
+      line-height: 0.96;
+      text-wrap: balance;
     }
 
-    .links a:hover { border-color: var(--accent); }
+    .intro-copy p {
+      max-width: 580px;
+      margin-top: 16px;
+      font-size: 18px;
+      line-height: 1.62;
+    }
 
-    /* ── Sections ── */
-    section { margin-bottom: 2.8rem; }
+    .ascii-card {
+      position: relative;
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      overflow: hidden;
+    }
+
+    .ascii-card::before {
+      content: none;
+    }
+
+    .ascii-card::after {
+      content: none;
+    }
+
+    .ascii-frame {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: transparent;
+      overflow: hidden;
+      color: #dbe8c8;
+      font-family: var(--mono);
+      font-size: 7.5px;
+      line-height: 1.02;
+      letter-spacing: 0;
+      white-space: pre;
+      user-select: none;
+      text-shadow: 0 0 10px rgba(153, 199, 129, 0.18);
+    }
+
+    .content-grid {
+      max-width: 980px;
+    }
+
+    section {
+      padding: 42px 0 48px;
+      border-top: 1px solid var(--line);
+    }
+
+    section:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
 
     h2 {
-      font-family: 'Lora', serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 0.9rem;
-      padding-bottom: 0.4rem;
-      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+      font-family: var(--serif);
+      font-size: clamp(32px, 3.2vw, 44px);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1.08;
     }
 
-    p { color: #333; margin-bottom: 0.6rem; }
-    p:last-child { margin-bottom: 0; }
-
-    /* ── Writing / Research list ── */
-    .item-list { list-style: none; }
-
-    .item-list li {
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
+    p {
+      max-width: 720px;
+      color: #312e28;
+      font-size: 18px;
+      line-height: 1.62;
     }
 
-    .item-list li:last-child { border-bottom: none; }
+    p + p {
+      margin-top: 14px;
+    }
+
+    .list {
+      list-style: none;
+      border-top: 1px solid var(--faint);
+    }
+
+    .list li {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 132px;
+      gap: 26px;
+      padding: 21px 0;
+      border-bottom: 1px solid var(--faint);
+    }
 
     .item-title {
+      display: inline;
+      font-family: var(--serif);
+      font-size: clamp(23px, 2.3vw, 30px);
       font-weight: 500;
-      color: var(--text);
-      text-decoration: none;
+      letter-spacing: -0.01em;
+      line-height: 1.14;
+      background-image: linear-gradient(transparent 72%, rgba(138, 155, 69, 0.28) 0);
+      background-size: 0 100%;
+      background-repeat: no-repeat;
+      transition: color 150ms ease, background-size 170ms ease;
     }
 
-    .item-title:hover { color: var(--accent); }
+    .item-title:hover {
+      color: var(--moss);
+      background-size: 100% 100%;
+    }
 
     .item-meta {
-      font-size: 0.82rem;
+      padding-top: 5px;
       color: var(--muted);
+      font-family: var(--mono);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: right;
     }
 
-    /* ── Tags ── */
-    .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.3rem; }
+    .item-note {
+      margin-top: 9px;
+      max-width: 590px;
+      color: #615b51;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
 
     .tag {
-      font-size: 0.75rem;
-      background: #ede;
-      color: #555;
-      padding: 0.15rem 0.5rem;
+      padding: 2px 7px 3px;
+      border: 1px solid rgba(31, 107, 74, 0.22);
       border-radius: 999px;
-      background: #f0ece6;
+      color: #4e5f42;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.2;
+      background: rgba(255, 253, 247, 0.52);
     }
 
-    /* ── Footer ── */
     footer {
-      margin-top: 4rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.8rem;
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
       color: var(--muted);
+      font-family: var(--mono);
+      font-size: 13px;
     }
 
-    @media (max-width: 480px) {
-      .header { flex-direction: column; gap: 1rem; }
+    @media (max-width: 980px) {
+      .shell {
+        width: min(100% - 38px, 780px);
+      }
+
+      .topbar {
+        margin-bottom: 46px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .ascii-card {
+        min-height: 0;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .shell {
+        width: 320px;
+        max-width: calc(100vw - 32px);
+        margin-left: 16px;
+        margin-right: auto;
+        padding-top: 14px;
+      }
+
+      .topbar {
+        display: block;
+        min-height: 0;
+        margin-bottom: 38px;
+      }
+
+      .nav {
+        justify-content: flex-start;
+        gap: 14px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        white-space: normal;
+      }
+
+      h1 {
+        width: 100%;
+        max-width: 100%;
+        font-size: 32px;
+        line-height: 1.05;
+        overflow-wrap: anywhere;
+        text-wrap: auto;
+      }
+
+      .ascii-card {
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        min-height: 0;
+        aspect-ratio: 1 / 1.18;
+      }
+
+      .ascii-frame {
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        font-size: 6.2px;
+        line-height: 1.03;
+      }
+
+      .list li {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .item-meta {
+        text-align: left;
+      }
     }
   </style>
 </head>
 <body>
-<main>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Dávid Rabb home">
+        <span class="seed" aria-hidden="true"></span>
+        <span>Dávid Rabb</span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#about">about</a>
+        <a href="#writing">writing</a>
+        <a href="#research">research</a>
+        <a href="https://github.com/RabbDavid" target="_blank" rel="noreferrer">github</a>
+      </nav>
+    </header>
 
-  <!-- Header -->
-  <div class="header">
-    <div class="avatar" id="avatar-placeholder">DR</div>
-    <!-- Replace the div above with: <img src="photo.jpg" alt="Dávid Rabb" class="avatar" /> -->
-    <div class="header-text">
-      <h1>Dávid Rabb</h1>
-      <p class="tagline">
-        Cognitive Neuroscience · AI Alignment · Software Engineering<br/>
-        Budapest, Hungary
-      </p>
-      <div class="links">
-        <a href="mailto:your@email.com">Email</a>
-        <a href="https://twitter.com/yourhandle" target="_blank">Twitter / X</a>
-        <a href="https://github.com/RabbDavid" target="_blank">GitHub</a>
-        <a href="https://scholar.google.com" target="_blank">Google Scholar</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- About -->
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      I'm a second-year Cognitive Neuroscience MSc student in Hungary, and I work as an SWE.
-    </p>
-    <p>
-      I'm interested in Alignment theory, and Representations inside Neural networks, Videogame strategies and Philosophy.
-    </p>
-  </section>
-
-  <!-- Research & Projects -->
-  <section id="research">
-    <h2>Research &amp; Projects</h2>
-    <ul class="item-list">
-      <li>
-        <a class="item-title" href="#">SAE Interpretability on GeoGuessr-Style Vision Models</a>
-        <span class="item-meta">In progress · 2025</span>
-        <div class="tags">
-          <span class="tag">mechanistic interp</span>
-          <span class="tag">sparse autoencoders</span>
-          <span class="tag">CLIP</span>
-          <span class="tag">ViT</span>
+    <main id="home">
+      <section id="about" class="hero" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <h1 id="page-title">About</h1>
+          <p>
+            I'm a second-year Cognitive Neuroscience MSc student, and I work as an SWE.
+          </p>
+          <p>
+            I'm interested in alignment theory, representations inside neural networks, videogame strategies, and philosophy.
+          </p>
+          <p>
+            I think seriously about League of Legends, not just as a game but as a system for studying strategic reasoning under uncertainty and incomplete information.
+          </p>
         </div>
-      </li>
-      <li>
-        <a class="item-title" href="#">[Your next project here]</a>
-        <span class="item-meta">2025</span>
-      </li>
-    </ul>
-  </section>
 
-  <!-- Writing -->
-  <section id="writing">
-    <h2>Writing</h2>
-    <ul class="item-list">
-      <li>
-        <a class="item-title" href="#">[Your first post — coming soon]</a>
-        <span class="item-meta">April 2025</span>
-      </li>
-    </ul>
-  </section>
+        <figure class="ascii-card" aria-label="ASCII park scene">
+          <iframe
+            class="ascii-frame"
+            title="ASCII park scene"
+            src="assets/park-ascii.html"
+            loading="eager"
+          ></iframe>
+        </figure>
+      </section>
 
-  <!-- Misc -->
-  <section id="misc">
-    <h2>Other things</h2>
-    <p>
-      I think seriously about League of Legends — not just as a game but as a
-      system for studying strategic reasoning under uncertainty and incomplete information.
-    </p>
-    <p>
-      Previously: class-ranking GPA in my first MSc semester while working full-time.
-      I like moving fast.
-    </p>
-  </section>
+      <div class="content-grid">
+        <div>
+          <section id="writing">
+            <h2>Writing</h2>
+            <ul class="list">
+              <li>
+                <div>
+                  <a class="item-title" href="#">Worsening Issues with LLMs</a>
+                </div>
+                <span class="item-meta">Draft</span>
+              </li>
+              <li>
+                <div>
+                  <a class="item-title" href="#">Shapes of Intelligence</a>
+                </div>
+                <span class="item-meta">Draft</span>
+              </li>
+              <li>
+                <div>
+                  <a class="item-title" href="#">Definition of Intelligence and Öntudat</a>
+                  <p class="item-note">
+                    Intelligence as the ability to model things; consciousness as self-knowledge, better captured by the Hungarian word "Öntudat".
+                  </p>
+                </div>
+                <span class="item-meta">Draft</span>
+              </li>
+              <li>
+                <div>
+                  <a class="item-title" href="#">The Scalability of Harnesses, the Bitter Lesson, and the Sweet Lesson</a>
+                </div>
+                <span class="item-meta">Draft</span>
+              </li>
+            </ul>
+          </section>
 
-  <footer>
-    <p>Dávid Rabb · Budapest · Last updated April 2025</p>
-  </footer>
+          <section id="research">
+            <h2>Research &amp; Projects</h2>
+            <ul class="list">
+              <li>
+                <div>
+                  <a class="item-title" href="#">SAE Interpretability on GeoGuessr-Style Vision Models</a>
+                  <div class="tags">
+                    <span class="tag">mechanistic interp</span>
+                    <span class="tag">sparse autoencoders</span>
+                    <span class="tag">CLIP</span>
+                    <span class="tag">ViT</span>
+                  </div>
+                </div>
+                <span class="item-meta">In progress<br />2026</span>
+              </li>
+              <li>
+                <div>
+                  <a class="item-title" href="#">Representation Spaces and Meaning</a>
+                  <p class="item-note">
+                    Notes toward a physicalist account of mental things as relational structure, not a separate substance.
+                  </p>
+                </div>
+                <span class="item-meta">Notebook</span>
+              </li>
+            </ul>
+          </section>
 
-</main>
+          <footer>
+            Dávid Rabb / Last updated June 2026
+          </footer>
+        </div>
+      </div>
+    </main>
+  </div>
 </body>
 </html>
